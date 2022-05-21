@@ -2,80 +2,7 @@ import React, { Component } from "react";
 import "../style/HotelTable.css";
 import { Link } from "react-router-dom";
 import hotelImage from "../images/Hotel-PNG.png"
-let hotels = [
-  {
-    id: 0,
-    name: "Maxx Royal",
-    score: 9.5,
-    img: "a",
-  },
-  {
-    id: 1,
-    name: "Suncity",
-    score: 0.7,
-    img: "b",
-  },
-  {
-    id: 2,
-    name: "Majesty",
-    score: 4.5,
-    img: "c",
-  },
-  {
-    id: 3,
-    name: "Majesty",
-    score: 4.5,
-    img: "c",
-  },
-  {
-    id: 4,
-    name: "Majesty",
-    score: 4.5,
-    img: "c",
-  },
-  {
-    id: 5,
-    name: "Majjjjesty",
-    score: 4.5,
-    img: "c",
-  },
-  {
-    id: 0,
-    name: "Maxx Royal",
-    score: 9.5,
-    img: "a",
-  },
-  {
-    id: 1,
-    name: "Suncity",
-    score: 0.7,
-    img: "b",
-  },
-  {
-    id: 2,
-    name: "2.sayfa",
-    score: 4.5,
-    img: "c",
-  },
-  {
-    id: 3,
-    name: "Majesty",
-    score: 4.5,
-    img: "c",
-  },
-  {
-    id: 4,
-    name: "3.sayfa",
-    score: 4.5,
-    img: "c",
-  },
-  {
-    id: 5,
-    name: "3.sayfa",
-    score: 4.5,
-    img: "c",
-  },
-];
+let hotels =[];
 
 export default class HotelTable extends Component {
   constructor(props) {
@@ -85,12 +12,14 @@ export default class HotelTable extends Component {
       totalHotels: hotels.length,
       activeHotelList: [],
       cardIsHover: null,
-      selectedSort: null
+      selectedSort: null,
+      openPopup: false
     };
   }
 
   componentDidMount() {
    this.getActiveHotelList(this.state.activePage);
+   hotels = JSON.parse(localStorage.getItem("hotels"))
   }
 
   getActiveHotelList = (i) => {
@@ -125,18 +54,25 @@ export default class HotelTable extends Component {
       )
   }
 
-  deleteHotel = (i) => {
-    hotels = hotels.filter((item, index) =>  index !== i);
+  openDeletePopup = (index, item) => {
+    console.log(item)
+    this.setState({openPopup: true, selectedHotel: item})
+  }
+
+  deleteHotel = (selectedHotel) => {
+    hotels = hotels.filter((item, index) =>  item.id !== selectedHotel.id);
     this.getActiveHotelList(this.state.activePage);
+    this.setState({selectedHotel: [], openPopup: false})
   }
 
   renderHotels = () => {
+    const {activeHotelList, cardIsHover} = this.state;
     return (
       <>
-        {this.state.activeHotelList.map((item, index) => {
+        {activeHotelList.map((item, index) => {
           return (
             <div onMouseLeave={() => {this.setState({cardIsHover: null})}} onMouseEnter={() => {this.setState({cardIsHover: index})}} key={index} className="hotel-card">
-              {this.state.cardIsHover === index && <div onClick={() => this.deleteHotel(index)} className="delete-button">X</div>}
+              {cardIsHover === index && <div onClick={() => this.openDeletePopup(index, item)} className="delete-button">X</div>}
               <img className="image-container" src={hotelImage} alt="hotel" />
               <div className="info-container">
                 <span>{item.name}</span>
@@ -154,7 +90,7 @@ export default class HotelTable extends Component {
     );
   };
   render() {
-    const {selectedSort} = this.state
+    const {selectedSort, openPopup,selectedHotel} = this.state
     return <div className="hotel-list">
       <div className="add-hotel-container">
       <Link style={{textDecoration: "none"}} to="/add-hotel"> <div className="add-hotel-icon">+</div></Link>
@@ -168,6 +104,16 @@ export default class HotelTable extends Component {
         </select>
        </div>
       {this.renderHotels()}
+      {openPopup && <div className="popup-container"> <div className="popup-item">
+        <div onClick={() => {this.setState({selectedHotel: [], openPopup: false})}} className="close-popup">X</div>
+        <div className="popup-title">Oteli Sil</div>
+        <div><span style={{fontWeight: 'bold'}}>{selectedHotel.name}</span>'i silmek istediğinizden emin misiniz ?</div>
+        <div className="popup-buttons">
+          <div onClick={() => {this.deleteHotel(selectedHotel)}} className="popup-delete-button">Oteli Sil</div>
+          <div onClick={() => {this.setState({selectedHotel: [], openPopup: false})}} className="popup-cancel-button">Vazgeç</div>
+        </div>
+        </div> 
+        </div>}
       </div>;
   }
 }
