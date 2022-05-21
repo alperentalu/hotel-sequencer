@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import "../style/AddHotel.css"
+import "../style/AddHotel.css";
+import { v4 as uuidv4 } from 'uuid';
 
 export default class AddHotel extends Component {
   constructor(props) {
     super(props);
     this.state= {
       hotelName: "",
-      submitNewHotel: false
+      submitNewHotel: false,
+      error: false
     }
   }
 
@@ -16,27 +18,37 @@ export default class AddHotel extends Component {
   }
 
   setNewHotel = () => {
-    let hotels = JSON.parse(localStorage.getItem('hotels'));
-    hotels.unshift({
-      id: hotels.length +1,
-      name: this.state.hotelName,
-      score: 0,
-    })
-    console.log(hotels);
-    // get localstorage 
-    // add localstorage
-    //last in first out
-    // set state submitNewHotel : true
+    if(this.state.hotelName === "") {
+      return this.setState({error: true})
+    }
+    let hotels = JSON.parse(localStorage.getItem('hotels')) || [];
+    if(hotels?.length > 0) {
+      hotels.unshift({
+        id: uuidv4(),
+        name: this.state.hotelName,
+        score: 0,
+      })
+    }
+    else {
+      hotels.push({
+        id: uuidv4(),
+        name: this.state.hotelName,
+        score: 0,
+      })
+    }
+    localStorage.setItem('hotels', JSON.stringify(hotels));
+    this.setState({submitNewHotel: true, error: false})
   }
 
   render() {
-    const {submitNewHotel} = this.state
+    const {submitNewHotel, error} = this.state
     return (
       <div className='add-hotel'>
         <Link style={{textDecoration: "none"}} to="/"><div className='back-button'>{"< Back"}</div></Link>
         <label className='input-label'>Otel Adı</label>
         <input onChange={this.onChange} className='hotel-input' type="text"></input>
-       {submitNewHotel ?  <div className='add-button'>Eklendi</div> :  <div onClick={this.setNewHotel} className='add-button'>Ekle</div>}
+       {error && <span className='error-text'>Lütfen otel adını boş bırakmayınız</span>}
+       {submitNewHotel ?  <div className='success-add-button'>Eklendi</div> :  <div onClick={this.setNewHotel} className='add-button'>Ekle</div>}
       </div>
     )
   }
