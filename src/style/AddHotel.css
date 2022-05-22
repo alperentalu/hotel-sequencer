@@ -5,8 +5,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        border: 1px solid #7393B3;
         align-items: center;
+        box-shadow: 1px 1px 20px 0px #cdcdcd5e;
+        border-radius: 5px;
 }
 .input-label {
     margin-bottom: 1vh;
