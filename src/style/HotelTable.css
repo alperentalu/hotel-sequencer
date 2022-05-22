@@ -3,12 +3,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1vw;
+    box-shadow: 1px 1px 20px 0px #cdcdcd5e;
+    border-radius: 5px;
 }
 .hotel-card {
     display: flex;
     flex-direction: row;
-    border: 1px solid lightgray;
-    box-shadow: 2px 2px lightgrey;
+    box-shadow: 1px 1px 20px 0px #cdcdcd5e;
+    border: 1px solid #cdcdcd5e;
     position: relative;
     align-items: center;
     border-radius: 5px;
@@ -16,16 +19,19 @@
     height: 14vh;
     margin: 1vh 1vw;
 }
+.hotel-name-text {
+    font-size: 20px;
+}
 .hotel-card:hover {
     display: flex;
     flex-direction: row;
-    border: 1px solid lightgray;
-    box-shadow: 2px 2px lightgrey;
+    box-shadow: 1px 1px 20px 0px #cdcdcd5e;
+    border: 1px solid #cdcdcd5e;
     position: relative;
     align-items: center;
     border-radius: 5px;
-    width: 36vw;
-    height: 16vh;
+    width: 35.5vw;
+    height: 14.2vh;
     margin: 1vh 1vw;
 }
 .image-container {
@@ -42,7 +48,7 @@
     display: flex;
     flex-direction: row;
     width: 22vw;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .score-button {
     display: flex;
@@ -51,14 +57,15 @@
     cursor: pointer;
     align-items: center;
     border-radius: 5px;
-    color: blue;
-    border: 1px solid blue;
+    color: #0096FF;
+    border: 1px solid #0096FF;
     height: 3vh;
     width: 10vw;
 }
 .score-text {
-    color: #35f200;
-    background-color: #e8eefa;
+    padding-left: 0.3vw;
+    color: #42c188;
+    background-color: #e6eaee;
     width: 10vw;
 }
 .pagination-container {    
@@ -72,10 +79,10 @@
     cursor: pointer;
 }
 .delete-button {
-    width: 2vw;
-    height: 2vw;
+    width: 2.2vw;
+    height: 2.2vw;
     border-radius: 50%;
-    background-color: red;
+    background-color: #FF5733;
     color: white;
     display: flex;
     justify-content: center;
@@ -89,26 +96,25 @@
     align-self: flex-start;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 38vw;
+    justify-content: center;
+    width: 26.5vw;
     flex-direction: row;
-    font-weight: bold;
 }
 .add-hotel-icon {
     width: 5vw;
     height: 5vh;
-    border: 1px solid blue;
+    border: 1px solid #0096FF;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    color: blue;
+    color: #0096FF;
 }
 select {
-    width: 15vw;
+    width: 18vw;
     height: 4vh;
-    border: 1px solid lightgray;
-    box-shadow: 1px 1px lightgrey;
+    border: 1px solid #cdcdcd5e;
+    box-shadow: 1px 1px 20px 0px #cdcdcd5e;
     border-radius: 5px;
     padding: 7px;
 }
@@ -143,10 +149,10 @@ select {
     right: -5px;
     cursor: pointer;
     top: -5px;
-    background-color: gray;
+    background-color: #878484;
     border-radius: 50%;
-    width: 2vw;
-    height: 2vw;
+    width: 2.2vw;
+    height: 2.2vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,7 +166,7 @@ select {
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    background-color: blue;
+    background-color: #0096FF;
     border: 1px solid;
     height: 5vh;
     width: 12vw;
@@ -173,8 +179,8 @@ select {
     font-size: 12px;
     align-items: center;
     border-radius: 5px;
-    color: blue;
-    border: 1px solid blue;
+    color: #0096FF;
+    border: 1px solid #0096FF;
     height: 5vh;
     width: 12vw;
 }

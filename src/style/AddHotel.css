@@ -1,56 +1,61 @@
 .add-hotel {
-        width: 21vw;
-        height: 95vh;
+        width: 50vw;
+        padding: 1vw;
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        border: 1px solid #7393B3;
+        align-items: center;
 }
 .input-label {
     margin-bottom: 1vh;
     align-self: flex-start;
 }
 .hotel-input {
-    width: 20vw;
+    width: 30vw;
     margin-bottom: 1vh;
     height: 5vh;
 }
 .add-button {
     display: flex;
     justify-content: center;
-    font-size: 12px;
+    font-size: 16px;
     align-items: center;
     border-radius: 5px;
     color: white;
-    align-self: flex-end;
     cursor: pointer;
-    background-color: blue;
+    background-color: #0096FF;
     border: 1px solid;
     height: 5vh;
     width: 12vw;
 }
 .back-button {
-    color: blue;
+    color: #0096FF;
     position: absolute;
-    top: 30vh;
-    left: 0;
+    top: 5px;
+    left: 5px;
 }
 .success-add-button {
     display: flex;
     justify-content: center;
-    font-size: 12px;
+    font-size: 16px;
     align-items: center;
     border-radius: 5px;
     color: white;
-    align-self: flex-end;
     cursor: pointer;
-    background-color: #0dd60d;
+    background-color: #00A36C;
     border: 1px solid;
     height: 5vh;
     width: 12vw;
 }
 .error-text {
-    color: red;
+    color: #FF5733;
     font-size: 10px;
     margin-bottom: 10px;
+}
+.input-container {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
 }

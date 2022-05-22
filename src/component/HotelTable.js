@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../style/HotelTable.css";
 import { Link } from "react-router-dom";
-import hotelImage from "../images/Hotel-PNG.png";
+import hotel from "../images/hotel.png"
 let hotels = [];
 
 export default class HotelTable extends Component {
@@ -55,11 +55,10 @@ export default class HotelTable extends Component {
   };
 
   getPagination = () => {
-    const { activePage, totalHotels } = this.state;
-    let totalPage = Math.ceil(totalHotels / 5);
     return (
       <div className="pagination-container">
         <span
+          style={{cursor: 'pointer'}}
           onClick={() => {
             this.changeActivePage(1);
           }}
@@ -72,7 +71,7 @@ export default class HotelTable extends Component {
               <span
                 className="pagination-item"
                 onClick={() => {
-                  this.changeActivePage(index / 5 + 1);
+                  this.changeActivePage((index / 5 )+ 1);
                 }}
                 key={index}
               >
@@ -82,8 +81,9 @@ export default class HotelTable extends Component {
           }
         })}
         <span
+          style={{cursor: 'pointer'}}
           onClick={() => {
-            this.changeActivePage(hotels.length / 5 + 1);
+            this.changeActivePage(Math.round(hotels.length / 5 )+ 1);
           }}
         >
           {">"}
@@ -155,9 +155,9 @@ export default class HotelTable extends Component {
                   X
                 </div>
               )}
-              <img className="image-container" src={hotelImage} alt="hotel" />
+              <img className="image-container" src={hotel} alt="hotel" />
               <div className="info-container">
-                <span>{item.name}</span>
+                <span className="hotel-name-text">{item.name}</span>
                 <span className="score-text">{`${item.score} Puan`}</span>
                 <div className="button-container">
                   <div
@@ -190,19 +190,19 @@ export default class HotelTable extends Component {
     return (
       <div className="hotel-list">
         <div className="add-hotel-container">
-          <Link style={{ textDecoration: "none" }} to="/add-hotel">
+          <Link style={{ textDecoration: "none", marginRight: '1vw' }} to="/add-hotel">
             {" "}
             <div className="add-hotel-icon">+</div>
           </Link>
-          <div>OTEL EKLE</div>
+          <span>OTEL EKLE</span>
         </div>
         <div style={{ alignSelf: "center" }}>
           <select onChange={(e) => {this.sortBy(e.target.value)}}>
             <option selected disabled value="a">
-              Sıralama
+              Sort
             </option>
-            <option value="increasing">Puan (Artan)</option>
-            <option value="decreasing">Puan (Azalan)</option>
+            <option value="increasing">Score (Increase)</option>
+            <option value="decreasing">Score (Decrease)</option>
           </select>
         </div>
         {hotels.length > 0 && this.renderHotels()}
@@ -218,10 +218,10 @@ export default class HotelTable extends Component {
               >
                 X
               </div>
-              <div className="popup-title">Oteli Sil</div>
+              <div className="popup-title">Delete Hotel</div>
               <div>
-                <span style={{ fontWeight: "bold" }}>{selectedHotel.name}</span>
-                'i silmek istediğinizden emin misiniz ?
+               Are u sure want to delete {" "}
+                <span style={{ fontWeight: "bold" }}>{selectedHotel.name}</span> ?
               </div>
               <div className="popup-buttons">
                 <div

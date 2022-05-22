@@ -1,7 +1,7 @@
 .App {
     display: flex;
     justify-content: center; 
-    font-family: 'SF Mono', monospace;
+    font-family: 'Montserrat';
     align-items: center;
     height: 100vh;
 }
